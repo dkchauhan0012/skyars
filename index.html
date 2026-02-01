@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skyars - Beyond the Bars</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* --- Animations copied from React --- */
+        
+        /* Moving Backgrounds (Right to Left) */
+        @keyframes move-left {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .animate-move-left-slow {
+            animation: move-left linear infinite;
+        }
+
+        .animate-move-left-medium {
+            animation: move-left 20s linear infinite;
+        }
+
+        .animate-move-left-fast {
+            animation: move-left 1s linear infinite;
+        }
+
+        .animate-move-left-super-fast {
+            animation: move-left 0.5s linear infinite;
+        }
+
+        /* Jet Hover Motion */
+        @keyframes jet-hover {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+        .animate-jet-hover {
+            animation: jet-hover 3s ease-in-out infinite;
+        }
+
+        /* Thruster Animations */
+        @keyframes thrust-flame {
+            0%, 100% { transform: scaleX(1) scaleY(1); opacity: 0.8; }
+            50% { transform: scaleX(1.2) scaleY(0.9); opacity: 1; }
+        }
+        .animate-thrust-flame {
+            animation: thrust-flame 0.1s linear infinite;
+        }
+
+        @keyframes thrust-core {
+            0%, 100% { transform: scaleX(1); opacity: 0.9; }
+            50% { transform: scaleX(1.05); opacity: 1; }
+        }
+        .animate-thrust-core {
+            animation: thrust-core 0.05s linear infinite;
+        }
+
+        @keyframes shockwave {
+            0% { opacity: 0.8; transform: translateX(0) skewX(-30deg); }
+            100% { opacity: 0.2; transform: translateX(-10px) skewX(-30deg); }
+        }
+        .animate-shockwave {
+            animation: shockwave 0.5s linear infinite;
+        }
+
+        @keyframes particle-shoot {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(-100px, 10px) scale(0); opacity: 0; }
+        }
+        .animate-particle-shoot {
+            animation: particle-shoot 0.6s linear infinite;
+        }
+
+        /* Blinking Lights */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+        .animate-blink {
+            animation: blink 1s ease-in-out infinite;
+        }
+
+        /* General Fade In */
+        @keyframes fade-in-up {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0; 
+        }
+        
+        @keyframes fade-in-down {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-down {
+            animation: fade-in-down 0.8s ease-out forwards;
+        }
+
+        @keyframes gradient-xy {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .animate-gradient-xy {
+            background-size: 200% 200%;
+            animation: gradient-xy 6s ease infinite;
+        }
+        
+        /* Utility classes for animation delays */
+        .animation-delay-150 { animation-delay: 150ms; }
+        .animation-delay-200 { animation-delay: 200ms; }
+        .animation-delay-300 { animation-delay: 300ms; }
+        .animation-delay-450 { animation-delay: 450ms; }
+        .animation-delay-500 { animation-delay: 500ms; }
+        .delay-700 { animation-delay: 700ms; }
+        .delay-850 { animation-delay: 850ms; }
+        .delay-1000 { animation-delay: 1000ms; }
+    </style>
+</head>
+<body class="bg-slate-900 text-white overflow-x-hidden relative flex flex-col min-h-screen">
+
+    <!-- --- INFINITE SIDE SCROLL SCENE (Background) --- -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-slate-900">
+        
+        <!-- Sky Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0f172a] via-[#1e1b4b] to-[#0f172a]"></div>
+        
+        <!-- Moon/Sun -->
+        <div class="absolute top-10 right-20 w-32 h-32 bg-cyan-500/20 rounded-full blur-[40px]"></div>
+        <div class="absolute top-14 right-24 w-20 h-20 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-full blur-sm opacity-80"></div>
+
+        <!-- Stars / Speed Lines (Generated via JS below) -->
+        <div id="star-container" class="absolute inset-0 z-0 opacity-40"></div>
+
+        <!-- Cityscape Silhouette (Mid Background) - Moving Left (Generated via JS below) -->
+        <div id="building-container" class="absolute bottom-[30%] left-0 w-[200%] h-32 z-10 opacity-30 animate-move-left-medium flex items-end gap-1"></div>
+
+        <!-- The Road Surface (Runway/Grid) -->
+        <div class="absolute bottom-0 w-full h-[30%] bg-[#0b0f19] z-20 border-t border-cyan-500/30 shadow-[0_-10px_40px_rgba(6,182,212,0.1)]">
+            <!-- Road Lines moving left (Generated via JS below) -->
+            <div id="road-lines" class="absolute top-1/2 w-full h-4 flex gap-20 animate-move-left-fast"></div>
+        </div>
+
+        <!-- Foreground Speed Blur (Closest) (Generated via JS below) -->
+        <div id="blur-lines" class="absolute bottom-0 w-full h-20 z-40 opacity-50"></div>
+
+        <!-- --- SPACE JET (Center) --- -->
+        <div class="absolute bottom-[25%] left-[10%] md:left-[20%] w-[380px] h-[140px] z-30 animate-jet-hover">
+            
+            <!-- --- UPGRADED THRUSTERS --- -->
+            
+            <!-- 1. Outer Massive Glow -->
+            <div class="absolute top-[45px] -left-40 w-80 h-32 bg-purple-600/30 blur-[40px] rounded-full animate-pulse"></div>
+
+            <!-- 2. Secondary Flame Trail -->
+            <div class="absolute top-[55px] -left-32 w-64 h-14 bg-gradient-to-l from-cyan-500 via-blue-600 to-transparent blur-lg opacity-80 animate-thrust-flame origin-right"></div>
+
+            <!-- 3. Core Intense Heat -->
+            <div class="absolute top-[62px] -left-16 w-40 h-6 bg-gradient-to-l from-white via-cyan-300 to-transparent blur-sm opacity-90 animate-thrust-core origin-right"></div>
+
+            <!-- 4. Shock Diamonds -->
+            <div class="absolute top-[58px] -left-28 flex gap-6 opacity-60 pointer-events-none">
+                <div class="w-3 h-10 bg-white/60 blur-[3px] skew-x-[-30deg] animate-shockwave"></div>
+                <div class="w-2 h-8 bg-white/40 blur-[3px] skew-x-[-30deg] animate-shockwave animation-delay-150"></div>
+                <div class="w-1 h-6 bg-white/20 blur-[3px] skew-x-[-30deg] animate-shockwave animation-delay-300"></div>
+            </div>
+
+            <!-- 5. High Speed Particles -->
+            <div class="absolute top-[65px] -left-10 w-1 h-1 bg-white rounded-full animate-particle-shoot"></div>
+            <div class="absolute top-[60px] -left-10 w-1 h-1 bg-cyan-200 rounded-full animate-particle-shoot animation-delay-200"></div>
+            <div class="absolute top-[70px] -left-10 w-1 h-1 bg-purple-200 rounded-full animate-particle-shoot animation-delay-500"></div>
+
+            <!-- Jet Body SVG -->
+            <svg viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-[0_0_25px_rgba(6,182,212,0.6)] relative z-10">
+                <!-- Main Fuselage -->
+                <path d="M50 70 L120 50 L280 40 C320 40 360 60 390 85 L395 90 L390 95 L280 110 L120 100 L50 80 Z" fill="#0f172a" stroke="#06b6d4" strokeWidth="2" />
+                <!-- Cockpit Canopy -->
+                <path d="M180 50 L260 50 C290 50 310 60 320 75 L200 75 L180 50 Z" fill="#1e293b" stroke="#06b6d4" strokeWidth="1" class="opacity-90" />
+                <path d="M220 50 L240 75" stroke="#06b6d4" strokeWidth="1" class="opacity-30" />
+                <!-- Wing (Far side) -->
+                <path d="M150 50 L220 20 L280 40" fill="#0f172a" stroke="#06b6d4" strokeWidth="1" class="opacity-70" />
+                <!-- Wing (Near side) -->
+                <path d="M120 80 L80 120 L220 100 L180 80 Z" fill="#0f172a" stroke="#06b6d4" strokeWidth="2" />
+                <path d="M120 80 L220 100" stroke="#06b6d4" strokeWidth="1" class="opacity-50" />
+                <!-- Engine Intake -->
+                <path d="M100 65 L140 65 L140 85 L100 85 Z" fill="#1e293b" stroke="#06b6d4" />
+                <!-- Tail Fin -->
+                <path d="M60 70 L90 30 L130 50 L80 70 Z" fill="#06b6d4" opacity="0.8" />
+                <!-- Navigation Lights -->
+                <circle cx="390" cy="90" r="2" fill="#fff" class="animate-blink" />
+                <circle cx="80" cy="120" r="2" fill="#ef4444" class="animate-blink" />
+            </svg>
+
+            <!-- Anti-Gravity Glow underneath -->
+            <div class="absolute bottom-[30px] left-[100px] w-40 h-10 bg-cyan-500/20 blur-xl rounded-full animate-pulse"></div>
+
+        </div>
+    </div>
+    <!-- --- END SCENE --- -->
+
+
+    <!-- Main Content -->
+    <div class="relative z-50 container mx-auto px-6 flex-grow flex flex-col justify-between py-8 min-h-screen">
+        
+        <!-- Header -->
+        <header class="flex justify-between items-center animate-fade-in-down backdrop-blur-md p-4 rounded-xl border border-white/5 bg-black/30">
+          <div class="flex items-center gap-2 group cursor-pointer">
+            <div class="relative w-10 h-10">
+                <div class="absolute inset-0 bg-gradient-to-tr from-cyan-400 to-blue-600 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-500 group-hover:duration-200 animate-tilt"></div>
+                <div class="relative w-full h-full bg-slate-900 rounded-lg flex items-center justify-center border border-slate-700/50">
+                    <span class="font-bold text-white text-lg group-hover:text-cyan-400 transition-colors">S</span>
+                </div>
+            </div>
+            <span class="text-2xl font-bold tracking-wider text-white group-hover:tracking-widest transition-all duration-300 drop-shadow-lg">SKYARS</span>
+          </div>
+          <!-- No Button here as requested -->
+        </header>
+
+        <!-- Hero Section -->
+        <main class="flex flex-col items-center text-center max-w-5xl mx-auto my-12">
+          
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/60 border border-cyan-500/30 mb-8 animate-fade-in-up backdrop-blur-md hover:border-cyan-500 transition-colors shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+            <span class="flex h-2 w-2 relative">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+            </span>
+            <span class="text-xs font-semibold text-cyan-400 tracking-wide uppercase">Hyper Flight Enabled</span>
+          </div>
+
+          <h1 class="text-5xl md:text-8xl font-black tracking-tight mb-8 leading-tight animate-fade-in-up animation-delay-150 drop-shadow-2xl">
+            <span class="block text-white drop-shadow-lg">Skyars</span>
+            <span class="bg-gradient-to-r from-cyan-400 via-white to-purple-400 text-transparent bg-clip-text filter drop-shadow-[0_0_10px_rgba(6,182,212,0.5)] italic">
+              Beyond the Bars
+            </span>
+          </h1>
+
+          <p class="text-lg md:text-xl text-slate-300 mb-12 max-w-2xl leading-relaxed animate-fade-in-up animation-delay-300 drop-shadow-md bg-black/40 p-4 rounded-xl backdrop-blur-sm border border-white/5">
+            Breaking limits and redefining horizons. Join us for the flight of a lifetime.
+          </p>
+
+          <!-- Newsletter Form -->
+          <div class="w-full max-w-md relative group animate-fade-in-up animation-delay-450 z-40">
+            <div class="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-xl blur opacity-40 group-hover:opacity-80 transition duration-1000 group-hover:duration-200 animate-gradient-xy"></div>
+            <form id="subscribeForm" class="relative flex items-center bg-black/80 backdrop-blur-xl rounded-xl border border-slate-700/50 p-2 shadow-2xl transition-transform duration-300 group-hover:scale-[1.01]">
+              <input 
+                type="email" 
+                id="emailInput"
+                placeholder="Enter your email address..." 
+                class="flex-1 bg-transparent border-none text-white placeholder-slate-400 focus:ring-0 px-4 py-2 outline-none w-full"
+                required
+              />
+              <button 
+                type="submit" 
+                id="submitBtn"
+                class="px-6 py-3 rounded-lg font-bold text-sm transition-all duration-300 flex items-center gap-2 shadow-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:shadow-cyan-500/50 hover:scale-105 active:scale-95 whitespace-nowrap"
+              >
+                <span>Notify Me</span> 
+                <i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+              </button>
+            </form>
+          </div>
+        </main>
+
+        <!-- Feature Highlights (Bottom) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 relative z-40">
+            
+            <!-- Item 1 -->
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-black/60 border border-slate-700/50 backdrop-blur-md hover:bg-black/80 transition-all duration-500 hover:border-cyan-500 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-2 animate-fade-in-up delay-700 group">
+                <div class="p-3 rounded-xl bg-slate-800/50 text-cyan-400 group-hover:text-white group-hover:bg-cyan-500 transition-colors duration-300">
+                    <i data-lucide="zap" class="w-5 h-5"></i>
+                </div>
+                <div class="text-left">
+                    <h3 class="text-sm font-bold text-slate-200 group-hover:text-white transition-colors">Hyper Speed</h3>
+                    <p class="text-xs text-slate-400 group-hover:text-slate-300 transition-colors">Built for performance.</p>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-black/60 border border-slate-700/50 backdrop-blur-md hover:bg-black/80 transition-all duration-500 hover:border-cyan-500 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-2 animate-fade-in-up delay-850 group">
+                <div class="p-3 rounded-xl bg-slate-800/50 text-cyan-400 group-hover:text-white group-hover:bg-cyan-500 transition-colors duration-300">
+                    <i data-lucide="globe" class="w-5 h-5"></i>
+                </div>
+                <div class="text-left">
+                    <h3 class="text-sm font-bold text-slate-200 group-hover:text-white transition-colors">Global Access</h3>
+                    <p class="text-xs text-slate-400 group-hover:text-slate-300 transition-colors">Available everywhere.</p>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-black/60 border border-slate-700/50 backdrop-blur-md hover:bg-black/80 transition-all duration-500 hover:border-cyan-500 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] hover:-translate-y-2 animate-fade-in-up delay-1000 group">
+                <div class="p-3 rounded-xl bg-slate-800/50 text-cyan-400 group-hover:text-white group-hover:bg-cyan-500 transition-colors duration-300">
+                    <i data-lucide="star" class="w-5 h-5"></i>
+                </div>
+                <div class="text-left">
+                    <h3 class="text-sm font-bold text-slate-200 group-hover:text-white transition-colors">Elite Design</h3>
+                    <p class="text-xs text-slate-400 group-hover:text-slate-300 transition-colors">Precision engineering.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="flex flex-col md:flex-row justify-between items-center py-6 border-t border-slate-800/50 animate-fade-in-up delay-1000 bg-black/40 backdrop-blur-md rounded-t-2xl px-6">
+          <p class="text-slate-500 text-sm">© 2026 Skyars Inc.</p>
+          <div class="flex gap-6 mt-4 md:mt-0">
+            <!-- <a href="#" class="text-slate-500 hover:text-cyan-400 hover:scale-125 transition-all duration-300">
+                <i data-lucide="twitter" class="w-5 h-5"></i>
+            </a> -->
+            <a href="https://www.instagram.com/theskyarz" class="text-slate-500 hover:text-cyan-400 hover:scale-125 transition-all duration-300">
+                <i data-lucide="instagram" class="w-5 h-5"></i>
+            </a>
+            <!-- <a href="#" class="text-slate-500 hover:text-cyan-400 hover:scale-125 transition-all duration-300">
+                <i data-lucide="facebook" class="w-5 h-5"></i>
+            </a> -->
+          </div>
+        </footer>
+
+    </div>
+
+    <!-- Scripts for dynamic generation and interactivity -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // 1. Generate Stars / Speed Lines
+        const starContainer = document.getElementById('star-container');
+        for (let i = 0; i < 30; i++) {
+            const star = document.createElement('div');
+            star.className = 'absolute h-[2px] bg-white rounded-full animate-move-left-slow';
+            star.style.top = Math.random() * 60 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.width = (Math.random() * 100 + 20) + 'px';
+            star.style.opacity = Math.random();
+            star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            star.style.animationDelay = '-' + (Math.random() * 5) + 's';
+            starContainer.appendChild(star);
+        }
+
+        // 2. Generate Buildings
+        const buildingContainer = document.getElementById('building-container');
+        for (let i = 0; i < 40; i++) {
+            const building = document.createElement('div');
+            building.className = 'w-12 bg-slate-800';
+            building.style.height = (20 + Math.random() * 80) + 'px';
+            buildingContainer.appendChild(building);
+        }
+
+        // 3. Generate Road Lines
+        const roadContainer = document.getElementById('road-lines');
+        for (let i = 0; i < 10; i++) {
+            const line = document.createElement('div');
+            line.className = 'w-40 h-2 bg-slate-700/50 transform skew-x-[-45deg]';
+            roadContainer.appendChild(line);
+        }
+
+        // 4. Generate Blur Lines (Foreground)
+        const blurContainer = document.getElementById('blur-lines');
+        for (let i = 0; i < 10; i++) {
+            const blur = document.createElement('div');
+            blur.className = 'absolute h-1 bg-cyan-500/30 blur-md animate-move-left-super-fast';
+            blur.style.top = Math.random() * 100 + '%';
+            blur.style.width = (Math.random() * 300 + 100) + 'px';
+            blur.style.animationDelay = '-' + Math.random() + 's';
+            blurContainer.appendChild(blur);
+        }
+
+        // 5. Handle Subscribe
+        const form = document.getElementById('subscribeForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const emailInput = document.getElementById('emailInput');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (emailInput.value) {
+                // Change button style to indicate success
+                const originalContent = submitBtn.innerHTML;
+                const originalClasses = submitBtn.className;
+                
+                submitBtn.innerHTML = '<span>Sent!</span>';
+                submitBtn.className = "px-6 py-3 rounded-lg font-bold text-sm transition-all duration-300 flex items-center gap-2 shadow-lg bg-green-500 text-white cursor-default scale-95";
+                
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalContent;
+                    submitBtn.className = originalClasses;
+                    emailInput.value = '';
+                    lucide.createIcons(); // Re-render icon
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
