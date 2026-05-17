@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Skyars</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#09090B',
+                        cyberPurple: '#A855F7',
+                        cosmicViolet: '#6366F1',
+                        mutedSlate: '#71717A',
+                        surface: 'rgba(255, 255, 255, 0.03)',
+                        surfaceHover: 'rgba(255, 255, 255, 0.06)'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        syne: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #09090B; color: #FFFFFF; overflow-x: hidden; }
+        html { scroll-behavior: smooth; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #09090B; }
+        ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #A855F7; }
+
+        .nav-link.active { color: #FFFFFF; font-weight: 600; }
+        .nav-link.active::after { content: ''; display: block; width: 100%; height: 2px; background: #A855F7; margin-top: 4px; border-radius: 2px; }
+    </style>
+</head>
+<body class="selection:bg-cyberPurple selection:text-white">
+
+    <!-- Navbar -->
+    <header id="navbar" class="fixed top-0 w-full z-50 backdrop-blur-md border-b border-mutedSlate/10 transition-all duration-300 bg-obsidian/80">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2 hover:opacity-90 transition cursor-pointer">
+                <!-- Apni logo.png file public/assets/ folder me rakh dena -->
+                <img src="/assets/logo.png" alt="Skyars Logo" class="h-10 w-auto object-contain" onerror="this.onerror=null; this.src='https://placehold.co/180x50/09090B/FFFFFF?text=SKYARS';">
+            </a>
+            
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-mutedSlate">
+                <a href="/" class="nav-link hover:text-white transition cursor-pointer">Home</a>
+                <a href="/services" class="nav-link active hover:text-white transition cursor-pointer">Services</a>
+                <a href="/about" class="nav-link hover:text-white transition cursor-pointer">About</a>
+                <a href="/careers" class="nav-link hover:text-white transition cursor-pointer">Careers</a>
+                <a href="/contact" class="nav-link hover:text-white transition cursor-pointer">Contact</a>
+            </nav>
+
+            <div class="hidden md:block">
+                <a href="/contact" class="px-5 py-2.5 rounded-lg bg-cyberPurple text-white font-semibold text-sm hover:bg-cyberPurple/90 transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer">
+                    Start a Project
+                </a>
+            </div>
+            
+            <!-- Mobile Menu Icon -->
+            <button class="md:hidden text-white p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-20">
+        <!-- Services Hero -->
+        <section class="max-w-7xl mx-auto px-6 text-center mb-24 relative">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-cosmicViolet/10 rounded-full blur-[120px] z-0 pointer-events-none"></div>
+            <div class="relative z-10 max-w-3xl mx-auto">
+                <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold border border-cosmicViolet/30 bg-cosmicViolet/10 text-cyberPurple mb-6 font-syne uppercase tracking-widest">
+                    Expertise
+                </span>
+                <h1 class="font-syne text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-6">
+                    End-to-End Digital Solutions
+                </h1>
+                <p class="text-lg md:text-xl text-mutedSlate leading-relaxed font-light">
+                    We are a dual-force agency. We build world-class, scalable solutions for our clients, and we engineer our own successful software products.
+                </p>
+            </div>
+        </section>
+
+        <!-- Client Solutions Grid -->
+        <section class="max-w-7xl mx-auto px-6 mb-32">
+            <h2 class="font-syne text-3xl font-bold mb-10 text-white flex items-center gap-4">
+                <span class="w-8 h-1 bg-cyberPurple rounded-full"></span>
+                Client Solutions
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Web Dev -->
+                <div class="p-10 rounded-3xl bg-surface border border-mutedSlate/10 hover:border-cyberPurple/30 hover:bg-surfaceHover transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-cyberPurple mb-8 border border-white/10 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="font-syne text-xl font-bold mb-4 text-white">Web Development</h3>
+                    <p class="text-mutedSlate text-sm leading-relaxed mb-6">
+                        We build high-performance, fully responsive web applications and complex SaaS dashboards. From landing pages to enterprise portals, our code is modular and built to scale.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-3 py-1 rounded-full bg-white/5 text-mutedSlate border border-white/10">React</span>
+                        <span class="text-xs px-3 py-1 rounded-full bg-white/5 text-mutedSlate border border-white/10">Node.js</span>
+                        <span class="text-xs px-3 py-1 rounded-full bg-white/5 text-mutedSlate border border-white/10">Next.js</span>
+                    </div>
+                </div>
+
+                <!-- App Dev -->
+                <div class="p-10 rounded-3xl bg-surface border border-mutedSlate/10 hover:border-cosmicViolet/30 hover:bg-surfaceHover transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-cosmicViolet mb-8 border border-white/10 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="font-syne text-xl font-bold mb-4 text-white">App Development</h3>
+                    <p class="text-mutedSlate text-sm leading-relaxed mb-6">
+                        Native and cross-platform mobile applications designed for seamless user experience. We bring your ideas to iOS and Android with smooth animations and robust backends.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-3 py-1 rounded-full bg-white/5 text-mutedSlate border border-white/10">Flutter</span>
+                        <span class="text-xs px-3 py-1 rounded-full bg-white/5 text-mutedSlate border border-white/10">React Native</span>
+                        <span class="text-xs px-3 py-1 rounded-full bg-white/5 text-mutedSlate border border-white/10">iOS/Android</span>
+                    </div>
+                </div>
+
+                <!-- AI & Smart Automation -->
+                <div class="p-10 rounded-3xl bg-surface border border-mutedSlate/10 hover:border-cyberPurple/30 hover:bg-surfaceHover transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-cyberPurple mb-8 border border-white/10 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="font-syne text-xl font-bold mb-4 text-white">AI & Smart Automation</h3>
+                    <p class="text-mutedSlate text-sm leading-relaxed mb-6">
+                        Stop doing manual tasks. We integrate intelligent software, machine learning models, and automated workflows into your business to save hundreds of hours and boost efficiency.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-3 py-1 rounded-full bg-white/5 text-mutedSlate border border-white/10">Python</span>
+                        <span class="text-xs px-3 py-1 rounded-full bg-white/5 text-mutedSlate border border-white/10">LLM Integration</span>
+                        <span class="text-xs px-3 py-1 rounded-full bg-white/5 text-mutedSlate border border-white/10">Data Pipelines</span>
+                    </div>
+                </div>
+
+                <!-- Smart IoT -->
+                <div class="p-10 rounded-3xl bg-surface border border-mutedSlate/10 hover:border-cosmicViolet/30 hover:bg-surfaceHover transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-cosmicViolet mb-8 border border-white/10 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25z"></path></svg>
+                    </div>
+                    <h3 class="font-syne text-xl font-bold mb-4 text-white">Smart IoT</h3>
+                    <p class="text-mutedSlate text-sm leading-relaxed mb-6">
+                        Bridging the physical and digital world. We build robust embedded systems, connect hardware to the cloud, and create real-time monitoring dashboards for your devices.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-3 py-1 rounded-full bg-white/5 text-mutedSlate border border-white/10">Embedded C/C++</span>
+                        <span class="text-xs px-3 py-1 rounded-full bg-white/5 text-mutedSlate border border-white/10">ESP32/Arduino</span>
+                        <span class="text-xs px-3 py-1 rounded-full bg-white/5 text-mutedSlate border border-white/10">MQTT</span>
+                    </div>
+                </div>
+
+                <!-- Prototyping -->
+                <div class="p-10 rounded-3xl bg-surface border border-mutedSlate/10 hover:border-cyberPurple/30 hover:bg-surfaceHover transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-cyberPurple mb-8 border border-white/10 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path></svg>
+                    </div>
+                    <h3 class="font-syne text-xl font-bold mb-4 text-white">Prototyping</h3>
+                    <p class="text-mutedSlate text-sm leading-relaxed mb-6">
+                        Have an idea but need to test it fast? We create rapid proof-of-concepts, UI/UX mockups, and hardware prototypes to turn your raw concepts into tangible, testable reality quickly.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-3 py-1 rounded-full bg-white/5 text-mutedSlate border border-white/10">Figma</span>
+                        <span class="text-xs px-3 py-1 rounded-full bg-white/5 text-mutedSlate border border-white/10">MVP Dev</span>
+                        <span class="text-xs px-3 py-1 rounded-full bg-white/5 text-mutedSlate border border-white/10">3D Printing</span>
+                    </div>
+                </div>
+
+                <!-- Maintenance & Support -->
+                <div class="p-10 rounded-3xl bg-surface border border-mutedSlate/10 hover:border-cosmicViolet/30 hover:bg-surfaceHover transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-cosmicViolet mb-8 border border-white/10 group-hover:scale-110 transition-transform">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </div>
+                    <h3 class="font-syne text-xl font-bold mb-4 text-white">Maintenance & Support</h3>
+                    <p class="text-mutedSlate text-sm leading-relaxed mb-6">
+                        Launching is just the beginning. We offer post-launch code audits, cloud infrastructure scaling, bug fixing, and continuous feature delivery to keep your product ahead of the curve.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-3 py-1 rounded-full bg-white/5 text-mutedSlate border border-white/10">AWS/Cloud</span>
+                        <span class="text-xs px-3 py-1 rounded-full bg-white/5 text-mutedSlate border border-white/10">Performance</span>
+                        <span class="text-xs px-3 py-1 rounded-full bg-white/5 text-mutedSlate border border-white/10">DevOps</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- In-House Products -->
+        <section class="max-w-7xl mx-auto px-6 mb-32">
+            <h2 class="font-syne text-3xl font-bold mb-10 text-white flex items-center gap-4">
+                <span class="w-8 h-1 bg-cosmicViolet rounded-full"></span>
+                Our In-House Products
+            </h2>
+            <div class="p-12 md:p-16 rounded-3xl bg-gradient-to-br from-surface to-obsidian border border-mutedSlate/10 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-cosmicViolet/10 rounded-full blur-[80px]"></div>
+                <div class="relative z-10 max-w-3xl">
+                    <h3 class="font-syne text-3xl md:text-4xl font-bold mb-6 text-white">Built by Skyars. Run by Skyars.</h3>
+                    <p class="text-mutedSlate text-lg leading-relaxed mb-8">
+                        Most agencies write code to spec, hand it over, and move on. We operate differently. As creators of our own successful SaaS platforms, we understand the entire product lifecycle—from user acquisition and retention to server scaling and UI psychology. 
+                    </p>
+                    <p class="text-mutedSlate text-lg leading-relaxed mb-8">
+                        When we build for you, we apply this same product-owner mindset. We don't just build software; we build businesses.
+                    </p>
+                    <button class="px-6 py-3 rounded-xl border border-mutedSlate/30 text-white font-syne font-semibold hover:bg-white/5 hover:border-cosmicViolet/50 transition-all text-sm tracking-wide">
+                        Explore Our Products (Coming Soon)
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Process -->
+        <section class="max-w-7xl mx-auto px-6 mb-32">
+            <div class="text-center mb-16">
+                <h2 class="font-syne text-3xl font-bold mb-4 text-white">How We Work</h2>
+                <p class="text-mutedSlate max-w-2xl mx-auto text-lg">A transparent, agile process ensuring you know exactly what is happening at every stage.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                <!-- Connecting Line for Desktop -->
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-[1px] bg-mutedSlate/20 -translate-y-1/2 z-0"></div>
+
+                <div class="relative z-10 bg-obsidian p-6 border border-mutedSlate/10 rounded-2xl md:border-none md:bg-transparent md:p-0">
+                    <div class="w-12 h-12 rounded-full bg-cyberPurple text-white font-syne font-bold flex items-center justify-center text-xl mb-6 mx-auto md:mx-0 shadow-[0_0_15px_rgba(168,85,247,0.3)]">1</div>
+                    <h4 class="font-syne text-xl font-bold text-white mb-3 text-center md:text-left">Discovery & Scope</h4>
+                    <p class="text-sm text-mutedSlate leading-relaxed text-center md:text-left">We dive deep into your requirements, map out the architecture, and provide a crystal-clear timeline and technical scope.</p>
+                </div>
+
+                <div class="relative z-10 bg-obsidian p-6 border border-mutedSlate/10 rounded-2xl md:border-none md:bg-transparent md:p-0">
+                    <div class="w-12 h-12 rounded-full bg-surface border border-mutedSlate/20 text-white font-syne font-bold flex items-center justify-center text-xl mb-6 mx-auto md:mx-0">2</div>
+                    <h4 class="font-syne text-xl font-bold text-white mb-3 text-center md:text-left">UI/UX Design</h4>
+                    <p class="text-sm text-mutedSlate leading-relaxed text-center md:text-left">We create wireframes and high-fidelity prototypes. You get to see and feel the product before we write a single line of code.</p>
+                </div>
+
+                <div class="relative z-10 bg-obsidian p-6 border border-mutedSlate/10 rounded-2xl md:border-none md:bg-transparent md:p-0">
+                    <div class="w-12 h-12 rounded-full bg-surface border border-mutedSlate/20 text-white font-syne font-bold flex items-center justify-center text-xl mb-6 mx-auto md:mx-0">3</div>
+                    <h4 class="font-syne text-xl font-bold text-white mb-3 text-center md:text-left">Development</h4>
+                    <p class="text-sm text-mutedSlate leading-relaxed text-center md:text-left">Agile sprints with regular updates. Our elite engineers build secure, scalable backend systems and flawless frontends.</p>
+                </div>
+
+                <div class="relative z-10 bg-obsidian p-6 border border-mutedSlate/10 rounded-2xl md:border-none md:bg-transparent md:p-0">
+                    <div class="w-12 h-12 rounded-full bg-cosmicViolet text-white font-syne font-bold flex items-center justify-center text-xl mb-6 mx-auto md:mx-0 shadow-[0_0_15px_rgba(99,102,241,0.3)]">4</div>
+                    <h4 class="font-syne text-xl font-bold text-white mb-3 text-center md:text-left">Launch & Scale</h4>
+                    <p class="text-sm text-mutedSlate leading-relaxed text-center md:text-left">Rigorous testing, server deployment, and final handover. We ensure a smooth launch and stand by for future scaling.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="max-w-7xl mx-auto px-6">
+            <div class="p-12 md:p-16 rounded-3xl bg-surface border border-mutedSlate/10 flex flex-col md:flex-row items-center justify-between gap-8">
+                <div>
+                    <h2 class="font-syne text-3xl md:text-4xl font-bold mb-4 text-white">Ready to engineer your vision?</h2>
+                    <p class="text-mutedSlate text-lg">Let our team build the technical foundation your business needs to grow.</p>
+                </div>
+                <div class="flex-shrink-0">
+                    <a href="/contact" class="inline-block px-8 py-4 rounded-xl bg-white text-obsidian font-syne font-bold hover:bg-gray-200 transition-colors text-sm tracking-wide">
+                        Discuss Your Project
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-mutedSlate/10 bg-obsidian py-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-center md:text-left">
+                <a href="/" class="flex justify-center md:justify-start items-center gap-2 hover:opacity-90 transition cursor-pointer">
+                    <img src="/assets/logo.png" alt="Skyars Logo" class="h-8 w-auto object-contain" onerror="this.onerror=null; this.src='https://placehold.co/150x40/09090B/FFFFFF?text=SKYARS';">
+                </a>
+                <p class="text-sm text-mutedSlate mt-2">Bhavnagar, Gujarat</p>
+            </div>
+            
+            <div class="flex space-x-6">
+                <a href="/services" class="text-sm text-white transition">Services</a>
+                <a href="/about" class="text-sm text-mutedSlate hover:text-white transition">About</a>
+                <a href="/careers" class="text-sm text-mutedSlate hover:text-white transition">Careers</a>
+                <a href="/contact" class="text-sm text-mutedSlate hover:text-white transition">Contact</a>
+            </div>
+
+            <div class="flex flex-col items-center md:items-end gap-4">
+                <div class="flex space-x-4">
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/company/skyars.in/" target="_blank" class="text-mutedSlate hover:text-cyberPurple transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                    <!-- Instagram -->
+                    <a href="https://instagram.com/theskyars" target="_blank" class="text-mutedSlate hover:text-cyberPurple transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                </div>
+                <p class="text-sm text-mutedSlate">&copy; 2026 Skyars. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar blur effect on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-obsidian/80');
+            } else {
+                navbar.classList.remove('bg-obsidian/80');
+            }
+        });
+    </script>
+</body>
+</html>
